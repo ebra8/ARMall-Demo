@@ -16,8 +16,8 @@ The UI is built exclusively using Jetpack Compose, emphasizing a reactive progra
 - **`ARNavigationScreen.kt`**: Contains the AR viewport using Sceneview and state-driven Compose widgets that overlay instructional text and recognized store names.
 
 ### ARCore Integration
-- **`ARCoreUtils.kt`**: Handles the offline image database setup. It loads target images from the `assets/` directory (e.g., `zara-intrance.jpg`, `bershka-intrance.jpg`), decodes them asynchronously, and registers them with ARCore.
-- **Real-time Engine**: Sceneview wraps the ARCore session. Features automatic camera focus (`Config.FocusMode.AUTO`) and per-frame evaluations mapping physical tracking points back to Compose state updates.
+- **`ARCoreUtils.kt`**: Handles the offline image database setup. It loads the highly optimized `mall_database.imgdb` precompiled database from the `assets/` directory. This single database seamlessly tracks 174 different store entrances without increasing app loading times or RAM usage.
+- **Real-time Engine**: Sceneview wraps the ARCore session. Features automatic camera focus (`Config.FocusMode.AUTO`) and per-frame evaluations mapping physical tracking points back to Compose state updates. Strings are dynamically formatted (e.g. `pull_bear_1` -> `Pull Bear`) for clean UI display.
 
 ## Setup and Building
 1. Clone this repository and open the project in **Android Studio** (Koala or newer recommended).
@@ -25,7 +25,7 @@ The UI is built exclusively using Jetpack Compose, emphasizing a reactive progra
 3. Ensure you have **Google Play Services for AR** installed on your Android test device.
 4. Click **Run > Run 'app'** to launch.
 5. Grant Camera permissions.
-6. Point the device camera at any of the predefined store logos (found in the `src/main/assets/` directory if you wish to display them on a monitor to test).
+6. Point the device camera at any of the store logos recognized by the database.
 
 ## Future Work (Navigation Expansion)
 The underlying architecture is built to support the future placement of 3D navigational arrows. By storing recognized images in the `trackedImages` `Set`, the foundation is laid out seamlessly for attaching recursive `ArNode` models to the physical anchors.
