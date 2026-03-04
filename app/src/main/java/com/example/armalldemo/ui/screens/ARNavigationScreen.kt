@@ -77,7 +77,12 @@ fun ARNavigationScreen() {
                     if (augmentedImage.trackingState == TrackingState.TRACKING && 
                         augmentedImage.trackingMethod == AugmentedImage.TrackingMethod.FULL_TRACKING) {
                         
-                        val storeName = augmentedImage.name
+                        // Format names like "pull_bear" -> "Pull Bear", "btc" -> "BTC", "miss_L" -> "Miss L" 
+                        val rawName = augmentedImage.name
+                        val storeName = rawName.split("_").joinToString(" ") { word ->
+                            word.replaceFirstChar { char -> char.uppercase() }
+                        }.replace("Btc", "BTC").replace("Miss L", "Miss L")
+
                         currentlyLookingAt = storeName
                         
                         // Keep track of detected images so we avoid redundant processing 
